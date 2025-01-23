@@ -82,8 +82,8 @@ function displayPokemonDetails(pokemon) {
   spriteContainer.appendChild(sprite);
 }
 
-// Search Pokémon on button click
-searchButton.addEventListener("click", async () => {
+// Search Pokémon on button click and enter key
+async function searchPokemon() {
   const query = searchInput.value.trim();
   if (!query) {
     alert("Please enter a Pokémon name or ID");
@@ -94,5 +94,14 @@ searchButton.addEventListener("click", async () => {
   if (pokemon) {
     displayPokemonDetails(pokemon);
   }
-});
+}
 
+// Trigger search on button click
+searchButton.addEventListener("click", searchPokemon);
+
+// Trigger search on Enter key press
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    searchPokemon();
+  }
+});
