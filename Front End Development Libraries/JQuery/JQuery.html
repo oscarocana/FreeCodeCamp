@@ -3,14 +3,14 @@
     $("#target1").css("color", "red"); //Alters the CSS of the targeted element
     $("#target1").prop("disabled", true); //Alters the properties of the targeted element
     $("#target4").remove(); //removes the targeted element
-    $("#target2").appendTo("#right-well");//moves the targeted element to the second targeted
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-    $("#left-well").children().css("color", "green");
-    $(".target:nth-child(2)").addClass("animated bounce");
-    $(".target:even").addClass("animated shake");
-    $("body").addClass("animated hinge")
+    $("#target2").appendTo("#right-well");//moves the targeted element to the second targeted element
+    $("#target5").clone().appendTo("#left-well");//copies the targeted element to the second targeted element
+    $("#target1").parent().css("background-color", "red"); //Alters the CSS of the parent of the targeted element
+    $("#right-well").children().css("color", "orange"); //Alters the CSS of the children of the targeted element
+    $("#left-well").children().css("color", "green"); //Alters the CSS of the children of the targeted element
+    $(".target:nth-child(2)").addClass("animated bounce"); //Alters the CSS of the nth child of the targeted element (2nd In this case)
+    $(".target:even").addClass("animated shake"); //Adds a class to even elements of the target
+    $("body").addClass("animated hinge") //Adds classes to the Element
 
   });
 </script>
