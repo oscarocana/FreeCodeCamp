@@ -53,3 +53,31 @@ const loginAction = () => {
 
 // Dispatch the action here:
 store.dispatch(loginAction());
+
+
+//Handle an Action in the Store
+
+
+const defaultState = {
+  login: false
+};
+
+const reducer = (state = defaultState, action) => {
+  // Change code below this line
+  if(action.type === "LOGIN"){
+    return state = {
+  login: true
+};
+  } else{
+    return defaultState
+  }
+  // Change code above this line
+};
+
+const store = Redux.createStore(reducer);
+
+const loginAction = () => {
+  return {
+    type: 'LOGIN'
+  }
+};
