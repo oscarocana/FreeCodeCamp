@@ -58,3 +58,28 @@ class DisplayMessages extends React.Component {
     );
   }
 }
+
+
+//Extract State Logic to Redux
+
+// Define ADD, addMessage(), messageReducer(), and store here:
+const ADD = "ADD"
+const addMessage = (message) => {
+  return {
+    type: ADD,
+    message
+  };
+};
+
+const messageReducer = (state = [], action) => {
+  switch(action.type) {
+    case ADD:
+      // Immutably add a new message to the state array
+      return [...state, action.message];
+    default:
+      // Return the current state for unknown actions
+      return state;
+  }
+};
+
+const store = Redux.createStore(messageReducer);
