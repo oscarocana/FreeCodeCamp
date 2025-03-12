@@ -3,10 +3,13 @@ const { useState, useEffect } = React;
 const App = () => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const fetchQuote = async () => {
     try {
+      setLoading(true); // Show loader when fetching starts
+      setError('');
       const res = await fetch('https://api.quotable.io/random');
       if (!res.ok) {
         throw new Error('Network response was not ok');
@@ -15,10 +18,11 @@ const App = () => {
       console.log(data); // Log the data to verify structure
       setQuote(data.content);
       setAuthor(data.author);
-      setError('');
     } catch (err) {
       console.error(err);
       setError('Failed to fetch quote. Please try again.');
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -27,8 +31,10 @@ const App = () => {
   }, []);
 
   return (
-    <div id="quote-box" style={{ padding: '20px', textAlign: 'center' }}>
-      {error ? (
+      <div id="quote-box" style={{ padding: '20px', textAlign: 'center' }}>
+      {loading ? (
+        <div className="loader"></div>
+      ) : error ? (
         <p>{error}</p>
       ) : (
         <>
@@ -37,8 +43,8 @@ const App = () => {
         </>
       )}
 
-      <button id="new-quote" onClick={fetchQuote}>
-        New Quote
+      <button id="new-quote" onClick={fetchQuote} disabled={loading}>
+         {loading ? 'Loading...' : 'New Quote'}
       </button>
 
       <a
