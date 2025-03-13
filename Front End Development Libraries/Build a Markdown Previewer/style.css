@@ -1,0 +1,60 @@
+/* Global Reset and Layout */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Container for Editor and Preview */
+.container {
+  display: flex;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Editor Styling */
+.editor-wrap, .preview-wrap {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#editor {
+  width: 100%;
+  height: calc(100% - 50px);
+  resize: none;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-family: monospace;
+}
+
+/* Preview Styling */
+#preview {
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Markdown Specific Styling */
+#preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+#preview code {
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+#preview pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
