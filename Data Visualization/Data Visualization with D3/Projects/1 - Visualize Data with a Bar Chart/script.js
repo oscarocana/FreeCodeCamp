@@ -50,6 +50,12 @@ let generateScales = () => {
 
 let drawBars = () => {
 
+    let tooltip = d3.select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("opacity","0")
+
+
     svg.selectAll("rect")
     .data(values)
     .enter()
@@ -58,7 +64,27 @@ let drawBars = () => {
     .attr("width",((width-2*padding) / values.length))
     .attr("data-date", (d) => d[0])
     .attr("data-gdp", (d) => d[1])
-    .attr("height", d => heightScale(d[1]))
+    .attr("height", (d) => heightScale(d[1]))
+    .attr("x", (d, i) => xScale(i))
+    .attr("y", (d) => height - heightScale(d[1]) - padding)
+    .on("mouseover", d => {
+        
+        tooltip.attr("data-date",d[0])
+        
+        tooltip.transition()
+        .style("opacity", "0.8")
+        .style("left", (d3.event.pageX) + "px")
+
+        tooltip.html(d[0]+"<br />"+"$"+d[1]+ " Billion")
+        
+        
+    })
+
+    .on("mouseout", d => {
+        tooltip.transition()
+        .style("opacity","0")
+    
+    })
 
 }
 
