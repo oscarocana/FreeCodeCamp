@@ -99,6 +99,11 @@ let generateAxis = () => {
         .attr("text-anchor", "middle") 
         .style("font-size", "18px")
         .text("Time in Minutes")
+
+    svg.append("text")
+        .attr("transform", "translate(420, 620)")
+        .style("font-size", "18px")
+        .text("Year")
 }
 
 req.open("GET", url, true)
