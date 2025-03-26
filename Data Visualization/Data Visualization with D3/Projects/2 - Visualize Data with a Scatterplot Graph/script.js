@@ -1,79 +1,54 @@
-let url = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json"
-let req = new XMLHttpRequest()
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-let values = []
-
-//stores scales for transformations 
-
-let xScale
-let yScale
-
-
-//Sets the size of the canvas
-let width = 850
-let height = 650
-let padding = 50
-
-let svg = d3.select("svg")
-
-//creates the canvas
-let drawCanvas = () => {
-    svg.attr("width", width)
-    svg.attr("height", height)
+*{
+    font-family: "Monserrat", sans-serif;
 }
 
-let generateScales = () => {
-    xScale = d3.scaleLinear()
-        .range([padding, width - padding])
-        .domain([d3.min(values, d => d["Year"]),d3.max(values, d => d["Year"])])
-    
-    yScale = d3.scaleTime()
-        .range([padding, height - padding])
-        .domain([d3.min(values, d => new Date(d["Seconds"]*1000)),
-        d3.max(values, d => new Date(d["Seconds"]*1000))])
+html{
+    height: 100%
 }
 
-let drawDataPoint = () => {
-
-    svg.selectAll("circle")
-        .data(values)
-        .enter()
-        .append("circle")
-        .attr("class", "dot")
-        .attr("r", 5)
-        .attr("data-xvalue", d => d["Year"])
-        .attr("data-yvalue", d => new Date(d["Seconds"] * 1000))
-        .attr("cx", d => xScale(d["Year"]))
-        .attr("cy", d => yScale(new Date(d["Seconds"] * 1000)))
+#title{
+    font-size: 30px;
+    fill: #17252A;
 }
 
-let generateAxis = () => {
-    
-    let xAxis = d3.axisBottom(xScale)
-        .tickFormat(d3.format('d'))
-
-    svg.append("g")
-        .call(xAxis)
-        .attr("id", "x-axis")
-        .attr("transform", "translate(0, " + (height - padding)+")")
-    
-    let yAxis = d3.axisLeft(yScale)
-        .tickFormat(d3.timeFormat("%M:%S"))
-
-    svg.append("g")
-        .call(yAxis)
-        .attr("id", "y-axis")
-        .attr("transform", "translate(" + padding + ",0)")
+body {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-req.open("GET", url, true)
-req.onload = () => {
-    values = JSON.parse(req.response) //converts and stores the response
-    //values = data.data //extracts and stores the data array
-    console.log(values)
-    drawCanvas()
-    generateScales()
-    drawDataPoint()
-    generateAxis()
+svg{
+    background-color: #DEF2F1;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 10px;
 }
-req.send()
+
+.dot{
+    stroke:  black;
+}
+
+.dot:hover{
+    fill: black
+}
+
+
+#tooltip{
+    height: auto;
+    width: auto;
+    opacity: 0;
+    margin-top: 10px;
+    color: #FEFFFF;
+    font-size: 28px;
+    text-align: center;
+    background-color: #2B7A78;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: "Monserrat";
+}
+
