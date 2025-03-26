@@ -29,18 +29,19 @@ svg{
     padding: 10px;
 }
 
-.bar{
-    background-color: #2B7A78;
-    border-color: #2B7A78;
-    fill: #2B7A78;
+.dot{
+    stroke:  black;
 }
 
-.bar:hover{
-    fill: red
+.dot:hover{
+    fill: black
 }
 
 
 #tooltip{
+    height: auto;
+    width: auto;
+    opacity: 0;
     margin-top: 10px;
     color: #FEFFFF;
     font-size: 28px;
@@ -50,5 +51,4 @@ svg{
     border-radius: 10px;
     font-family: "Monserrat";
 }
-
 
