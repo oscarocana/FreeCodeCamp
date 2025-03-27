@@ -4,6 +4,9 @@ let req = new XMLHttpRequest
 let baseTemp
 let values = []
 
+let minYear
+let maxYear
+
 let xScale 
 let yScale
 
@@ -18,8 +21,10 @@ svg.attr("height", height)
 let generateScales = () =>{
     xScale = d3.scaleLinear()
         .range([padding, width - padding])
+        .domain([minYear = d3.min(values, d => d.year), maxYear = d3.max(values, d => d.year)])
 
     yScale = d3.scaleTime()
+        .domain([new Date(0, 0, 0, 0, 0, 0, 0), new Date(0, 12, 0, 0, 0, 0, 0)])
         .range([padding, height - padding])
     }
 
@@ -44,10 +49,20 @@ let drawMap = () => {
                 }
             
         })
+        .attr("data-year", (d) => d["year"])
+        .attr("data-month", (d) => d["month"]-1)
+        .attr("data-temp", (d) => d["variance"])
+        .attr("height", (height-2*padding) / 12)
+        .attr("width", ((width - 2*padding) / (maxYear- minYear)))
+        .attr("y", d => yScale(new Date(0, d["month"] - 1, 0, 0, 0, 0, 0)))
+        .attr("x", d => xScale(d["year"]))
+        
 }
 
 let drawAxes = () => {
     let xAxis = d3.axisBottom(xScale)
+        .tickFormat(d3.format("d"))
+
     svg.append("g")
         .call(xAxis)
         .attr("transform", "translate(0, " + (height - padding) +")")
