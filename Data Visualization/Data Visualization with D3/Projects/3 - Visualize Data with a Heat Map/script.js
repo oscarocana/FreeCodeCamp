@@ -10,7 +10,7 @@ let maxYear
 let xScale 
 let yScale
 
-let width = 800
+let width = 1400
 let height = 800
 let padding = 50
 
@@ -20,8 +20,8 @@ svg.attr("height", height)
 
 let generateScales = () =>{
     xScale = d3.scaleLinear()
-        .range([padding, width - padding])
-        .domain([minYear = d3.min(values, d => d.year), maxYear = d3.max(values, d => d.year)])
+        .range([padding, width - padding+1])
+        .domain([minYear = d3.min(values, d => d.year), maxYear = d3.max(values, d => d.year) + 1])
 
     yScale = d3.scaleTime()
         .domain([new Date(0, 0, 0, 0, 0, 0, 0), new Date(0, 12, 0, 0, 0, 0, 0)])
@@ -41,7 +41,7 @@ let drawMap = () => {
                 }else if(variance <= -1){
                     return "lightBlue"
                 }else if(variance <= 0){
-                    return "paleYellow"
+                    return "beige"
                 }else if(variance <= 1){
                     return "orange"
                 }else{
@@ -69,6 +69,8 @@ let drawAxes = () => {
         .attr("id", "x-axis")
     
     let yAxis = d3.axisLeft(yScale)
+        .tickFormat(d3.timeFormat("%B"))
+
     svg.append("g")
         .call(yAxis)
         .attr("transform", "translate("+ padding + ",0)")
