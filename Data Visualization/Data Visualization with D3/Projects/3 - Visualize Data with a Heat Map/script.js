@@ -22,6 +22,8 @@ let legend = d3.select("#legend")
     legend.attr("width", width)
     legend.attr("height", 250)
 
+let tooltip = d3.select("#tooltip")
+
 let generateScales = () =>{
     xScale = d3.scaleLinear()
         .range([padding, width - padding+1])
