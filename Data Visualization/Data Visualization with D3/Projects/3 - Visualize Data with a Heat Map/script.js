@@ -62,6 +62,16 @@ let drawMap = () => {
         .attr("width", ((width - 2*padding) / (maxYear- minYear)))
         .attr("y", d => yScale(new Date(0, d["month"] - 1, 0, 0, 0, 0, 0)))
         .attr("x", d => xScale(d["year"]))
+        .on("mouseover", (d) => {
+            tooltip.transition()
+            .style("opacity", "0.8")
+            tooltip.text("Date: " + d["month"] + " " + d["year"] + " Tempreature: " + (Math.round((baseTemp + d["variance"])* 100)/100)  +  "°C" +" Variance: " + d["variance"]+"°C")
+            tooltip.attr("data-year", d["year"])
+        })
+        .on("mouseout", (d) => {
+            tooltip.transition()
+                .style("opacity", "0")
+        })
         
 }
 
