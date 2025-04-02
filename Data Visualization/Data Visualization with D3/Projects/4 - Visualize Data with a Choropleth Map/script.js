@@ -3,10 +3,33 @@ let educationLevelURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data
 
 let canvas = d3.select("#canvas")
 
-let countyData = topojson.feature(d3.json(countyURL), d3.json(countyURL).objects.counties)
-let educationData = d3.json(educationLevelURL)
+let countyData
+let educationData
 
 let drawMap = () => {
 }
 
-console.log(countyData)
+d3.json(countyURL).then(
+    (data, error) => {
+        if(error){
+            console.log(error)
+        }else{
+            countyData = topojson.feature(data, data.objects.counties)
+            console.log(countyData)
+
+            d3.json(educationData).then(
+                (data,error) => {
+                    if(error){
+                        console.log(error)
+                    }else{
+                        educationData = data
+                        console.log(educationData)
+                    }
+                }
+            )
+        }
+        
+        
+    }
+)
+
