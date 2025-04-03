@@ -53,7 +53,7 @@ let drawMap = () => {
             })
 
             tooltip.text(county["fips"])
-            .attr("data-education", )
+            .attr("data-education", county["bachelorsOrHigher"])
         })
 
         .on("mouseout", d=> {
