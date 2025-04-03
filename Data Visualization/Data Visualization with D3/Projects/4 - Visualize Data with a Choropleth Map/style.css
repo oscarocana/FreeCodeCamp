@@ -20,13 +20,25 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+    color: black;
 }
 
-svg{
+#canvas{
     background-color: #DEF2F1;
     box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
     border-radius: 10px;
     padding: 10px;
+    min-width: 1000px;
+    min-height: 600px;
+    margin-bottom: 50px;
 }
 
-
+#legend{
+    background-color: #DEF2F1;
+    color: #17252A ;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 100px;
+    min-height: 200px;
+}
