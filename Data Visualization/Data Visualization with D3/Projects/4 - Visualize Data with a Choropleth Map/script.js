@@ -32,8 +32,17 @@ let drawMap = () => {
                 return"darkgreen"
             }
         })
-}
-    
+        .attr("data-fips", (d) => d["id"])
+        .attr("data-education", (d) => { 
+            let id = d["id"]
+            let county = educationData.find((d) => {
+                return d.fips === id
+            })
+            let percentage = county["bachelorsOrHigher"]
+            return percentage
+
+        })
+    }
     
 d3.json(countyURL).then(
     (data, error) => {
