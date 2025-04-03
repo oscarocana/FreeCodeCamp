@@ -13,6 +13,11 @@ html{
     fill: #17252A;
 }
 
+#tooltip{
+opacity: 0;
+}
+
+
 body {
     background-color: grey;
     display: flex;
@@ -21,6 +26,9 @@ body {
     align-items: center;
     height: 100%;
     color: black;
+}
+.county:hover{
+    fill: black;
 }
 
 #canvas{
