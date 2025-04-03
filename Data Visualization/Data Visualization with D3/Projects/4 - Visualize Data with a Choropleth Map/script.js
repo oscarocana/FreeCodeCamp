@@ -2,6 +2,7 @@ let countyURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropl
 let educationLevelURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json"
 
 let canvas = d3.select("#canvas")
+let tooltip = d3.select("#tooltip")
 
 let countyData
 let educationData
@@ -41,6 +42,23 @@ let drawMap = () => {
             let percentage = county["bachelorsOrHigher"]
             return percentage
 
+        })
+
+        .on("mouseover", d=> {
+            tooltip.transition()
+            .style("opacity", "0.8")
+            let id = d["id"]
+            let county = educationData.find((d) => {
+                return d.fips === id
+            })
+
+            tooltip.text(county["fips"])
+            .attr("data-education", )
+        })
+
+        .on("mouseout", d=> {
+            tooltip.transition()
+            .style("opacity", "0")
         })
     }
     
