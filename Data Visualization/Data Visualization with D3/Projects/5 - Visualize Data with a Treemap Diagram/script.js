@@ -5,4 +5,19 @@ let VideoGameData
 let canvas = d3.select("#canvas")
 let tooltip
 
-let drawMap = () => {}
+let drawTreeMap = () => {
+
+}
+
+d3.json(VideoGameDataUrl).then(
+        (data, error) => {
+            if (error) {
+                console.log(error);
+        }else{
+            VideoGameData = data
+            console.log(VideoGameData)
+            drawTreeMap()
+            
+        }
+    }
+)
