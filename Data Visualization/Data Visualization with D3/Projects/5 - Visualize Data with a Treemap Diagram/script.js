@@ -19,12 +19,17 @@ let drawTreeMap = () => {
                         .size([1000,1000])
 
     createTreeMap(hierarchy)
+    
+    let leaves = hierarchy.leaves()
     console.log(hierarchy.leaves())
 
-    // canvas.selectAll("rect")
-    // .data(VideoGameData)
-    // .enter()
-    // .append("rect")
+    let tile = canvas.selectAll("g")
+        .data(leaves)
+        .enter()
+        .append("g")
+
+    tile.append("rect")
+        .attr("class","tile")
 }
 
 d3.json(VideoGameDataUrl).then(
