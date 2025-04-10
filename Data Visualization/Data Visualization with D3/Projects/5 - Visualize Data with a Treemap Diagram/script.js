@@ -3,7 +3,7 @@ let VideoGameDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/
 let VideoGameData 
 
 let canvas = d3.select("#canvas")
-let tooltip
+let tooltip = d3.select("#tooltip")
 
 let drawTreeMap = () => {
 
@@ -76,6 +76,22 @@ let drawTreeMap = () => {
         .attr("data-value", d => d["data"]["value"])
         .attr("width", d => d["x1"] - d["x0"])
         .attr("height", d => d["y1"] - d["y0"])
+        .on("mouseover", (d) =>{
+            console.log(d)
+            let units = d["data"]['value']
+            tooltip.transition()
+                .style("opacity","0.8")
+            tooltip.html(d["data"]["name"] +"<br />"+ units + "M copies sold" +"<br />" + "Console :"+d["data"]["category"])
+            tooltip.attr("data-value",d["data"]["value"])
+        })
+        .on("mousemove", (event, d) => {
+            tooltip.style("left", (event.pageX + 10) + "px")
+                   .style("top", (event.pageY + 10) + "px");
+        })
+        .on("mouseout", (d) =>{
+            tooltip.transition()
+                .style("opacity","0")
+        })
 
         tile.append("text")
             .text(d => d["data"]["name"])
