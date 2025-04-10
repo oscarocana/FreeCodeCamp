@@ -27,6 +27,8 @@ let drawTreeMap = () => {
         .data(leaves)
         .enter()
         .append("g")
+        .attr("transform", d => "translate("+d["x0"]+ " " + d["y0"] + ")")
+
 
     tile.append("rect")
         .attr("class","tile")
@@ -41,7 +43,7 @@ let drawTreeMap = () => {
             }else if(category==="DS"){
                 return "#FFD700"
             }else if(category==="X360"){
-                "#A2C837"
+                return "#A2C837"
             }else if(category==="PS3"){
                 return "#686868"
             }else if(category==="PS2"){
@@ -67,7 +69,18 @@ let drawTreeMap = () => {
             }else{
                 return "#52B043"
             }
+            
         })
+        .attr("data-category", d => d["data"]["category"])
+        .attr("data-name", d => d["data"]["name"])
+        .attr("data-value", d => d["data"]["value"])
+        .attr("width", d => d["x1"] - d["x0"])
+        .attr("height", d => d["y1"] - d["y0"])
+
+        tile.append("text")
+            .text(d => d["data"]["name"])
+            .attr("x", 5 )
+            .attr("y", 20)
 }
 
 d3.json(VideoGameDataUrl).then(
